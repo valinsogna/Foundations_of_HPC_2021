@@ -78,7 +78,7 @@ int main ( int argc , char *argv[ ] )
 //    int time_to_sleep=1*myid;
 //    sleep(time_to_sleep);
 
-    MPI_Ssend(&local_M , 1 ,MPI_LONG_LONG, master , tag ,MPI_COMM_WORLD) ;
+    MPI_Ssend(&local_M , 1 ,MPI_LONG_LONG, master , tag ,MPI_COMM_WORLD) ; //syncronized send!
     end_time=MPI_Wtime();
     printf ( "\n # walltime on processor %i : %10.8f \n",myid, end_time - start_time ) ;
   }
