@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include <mpi.h>
+#include "/usr/local/Cellar/open-mpi/4.1.1_2/include/mpi.h"
 #define USE MPI
 #define SEED 35791246
 
