@@ -1,0 +1,23 @@
+nthreads =3
+ndata = 40
+next_bunch = 0
+
+* thread 2 enters _Atomic
+    my_star = 0
+    next_bunch = 10
+
+* thread 1 enters _Atomic || thread 2 if( my_star < ndata) {} -> true
+    my_star = 10
+    next_bunch = 20
+
+* thread 0 enters _Atomic || thread 1 if( my_star < ndata) {} -> true
+    my_star = 20
+    next_bunch = 30
+
+* thread 1 enters _Atomic || thread 0 if( my_star < ndata) {} -> true
+    my_star = 30
+    next_bunch = 40
+
+* thread 2 enters _Atomic || thread 1 if( my_star < ndata) {} -> true
+    my_star = 40
+    next_bunch = 50

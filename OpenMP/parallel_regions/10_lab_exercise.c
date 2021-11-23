@@ -58,6 +58,7 @@ int main ( int argc, char **argv )
 
   // ....
   //
+  int Nthreads;
   
  #pragma omp parallel
   {
