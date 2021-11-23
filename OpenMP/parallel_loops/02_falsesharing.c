@@ -23,7 +23,8 @@
  │     along with this program.  If not, see <http://www.gnu.org/licenses/>   │
  │                                                                            │
  * ────────────────────────────────────────────────────────────────────────── */
-
+//data sharing: explicit sharing of mem region
+//false sharing: region of contiguos cache lines
 
 #if defined(__STDC__)
 #  if (__STDC_VERSION__ >= 199901L)

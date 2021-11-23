@@ -33,8 +33,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <omp.h>
-
+#include "/usr/local/Cellar/libomp/13.0.0/include/omp.h"
+//To compile use clang -Xpreprocessor -fopenmp -lomp -o loop_without_for loop_without_for.c
 
 #define N_default     1000  // how long is the main array
 

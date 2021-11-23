@@ -82,7 +82,8 @@ int main( int argc, char **argv )
 
   printf("omp summation with %d threads\n", nthreads );
 
-  // allocate memory
+  // allocate memory: MALLOC -> false sharing (cache contention, not cache miss!)
+  // Touching of memory: memory is requested but not allocated 
   if ( (array = (double*)malloc( N* sizeof(double) )) == NULL )
     {
       printf("I'm sorry, there is not enough memory to host %llu bytes\n",
