@@ -36,7 +36,7 @@ int main ( int argc, char **argv)
      #pragma omp for reduction(+:M)
       for( long long unsigned i = 0; i < N; i++)
 	{
-	  x = drand48(); 
+	  x = drand48(); //Internal status of entropy miust differ among threads: use erand48, not drand48
 	  y = drand48();
 	  M += ((x*x + y*y) < 1.0);
 	}

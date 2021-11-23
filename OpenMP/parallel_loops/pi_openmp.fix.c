@@ -33,10 +33,10 @@ int main(int argc,char* argv[])
    #pragma omp for reduction(+:M)
     for( long long unsigned int i = 0; i < N; i++)
       {
-	double x = erand48( myseeds ); 
-	double y = erand48( myseeds );
-	
-	M += ( (x*x + y*y) < 1.0 );
+	      double x = erand48( myseeds ); 
+	      double y = erand48( myseeds );
+      
+	      M += ( (x*x + y*y) < 1.0 );
       } 
   }    
     
