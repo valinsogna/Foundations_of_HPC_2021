@@ -44,6 +44,7 @@
 
 int main( int argc, char **argv )
 {
+  //variables outisde the parallel region are shared: only thread 0 exists!
   int     i;
   int     nthreads = 1;
   double *array_s, *array_p;
@@ -75,21 +76,22 @@ int main( int argc, char **argv )
 
 #pragma omp parallel
 #pragma omp master
-  nthreads = omp_get_num_threads();
+  nthreads = omp_get_num_threads(); //in stack of thrread 0 it is updated
 
   printf("using %d threads\n", nthreads);
+  //shared array as long as the number of threads
   size_t stack_base_addresses[ nthreads ];
   size_t stack_top_addresses[ nthreads ];
 
   // also prove who are the private i and array_p for each thread
- #pragma omp parallel private(i, array_p)
+ #pragma omp parallel private(i, array_p) //now each thread as an instance of variable i (completly different variables than the shared i!)
   {
     int me = omp_get_thread_num();
     unsigned long long my_stackbase;
     unsigned long long my_stacktop;
     __asm__("mov %%rbp,%0" : "=mr" (my_stackbase));
     __asm__("mov %%rsp,%0" : "=mr" (my_stacktop));
-
+  //each thread is writing to the shared arryas (false sharing ok)
     stack_base_addresses[me] = my_stackbase;
     stack_top_addresses[me] = my_stacktop;
     
