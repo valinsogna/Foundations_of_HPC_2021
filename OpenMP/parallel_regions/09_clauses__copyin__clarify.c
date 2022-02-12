@@ -62,6 +62,9 @@ int main( int argc, char **argv )
     
     printf("[PR 1] thread %d has a golden value %g\n",
 	   omp_get_thread_num(), golden_value );
+     //Are the values correct? Maybe NO:
+     //Standard says:
+     //Copy ends for sure at the END of the parallel region!!Not at the entrance!
   }    
 
 
