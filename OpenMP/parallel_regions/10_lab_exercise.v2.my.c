@@ -71,6 +71,7 @@ int main ( int argc, char **argv )
     {
       Nthreads = omp_get_num_threads();
       data_are_arriving = more_data_arriving(0);
+      //NOW WE DON?T KNOW HOW MANY DATA WE ARE RECEVING
     }
 
     
@@ -79,7 +80,7 @@ int main ( int argc, char **argv )
 
        #pragma omp single                               // [1] a thread is getting data
 	{
-	  ndata = getting_data( &data );
+	  ndata = getting_data( &data ); // I am passing a pointer to data, not data!
 	  printf("iteration %d: thread %d got %d data\n",
 		 iteration, me, ndata );
 	}
@@ -146,7 +147,7 @@ int more_data_arriving( int i )
 }
 
 
-int getting_data( int **data )
+int getting_data( int **data ) // I pass a pointer to data (I passed a pointer to a pointer)
 {
  #define MIN  10
  #define MAX 25
@@ -159,7 +160,9 @@ int getting_data( int **data )
   // be sure that the data
   // array has enough room
   // to host up to n-1 data
-  *data = (int*)calloc( howmany, sizeof(int));
+  *data = (int*)calloc( howmany, sizeof(int)); // Then *data is a pointer: it's the de-refernce operator!
+  // I am writing in the memory region pointed by data which is a poibter too!
+  // (without * I am writing on data)
   
   for( int j = 0; j < howmany; j++ )
     (*data)[j] = 1024 + lrand48() % (MAX-MIN);  // values will range
