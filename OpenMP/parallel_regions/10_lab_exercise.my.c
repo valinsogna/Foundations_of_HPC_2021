@@ -24,7 +24,13 @@
  │                                                                            │
  * ────────────────────────────────────────────────────────────────────────── */
 
+/* Two ways of implement the algorithm:
+1- Everything is shared among threads
+2- Producer - consumer model:  producer receives data, and then distriubte it among the others. 
+  CONS: overhead! one-to-one communication (not really one-to many neither in MPI)
 
+This implemetation was done like 1.
+*/
 #if defined(__STDC__)
 #  if (__STDC_VERSION__ >= 199901L)
 #     define _XOPEN_SOURCE 700
@@ -49,20 +55,22 @@ int main ( int argc, char **argv )
 {
 
   srand48(time(NULL));
-
-  int  Nthreads;
+  //SHARED VARIABLES:
+  int  Nthreads; //number of threads
   int  iteration = 0;
   int  data_are_arriving;
-  int  ndata;
-  int *data; 
+  int  ndata; //how many data are arriving
+  int *data; //data themselves
   
  #pragma omp parallel
   {
-    int me = omp_get_thread_num();
+    int me = omp_get_thread_num(); //every threads has its own id stored in me
     
-   #pragma omp single
+   #pragma omp single //just one thread is executing it
     {
       Nthreads = omp_get_num_threads();
+      // data is a shared pointer!
+      // Since it is in the heap, everybody can access it and its memeory allocated!
       data     = (int*)calloc(Nthreads, sizeof(int));   // requirements specify that
 							// there will never be more
 							// than Nthreads data
