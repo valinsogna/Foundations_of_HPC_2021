@@ -50,8 +50,9 @@ int main( int argc, char **argv )
     printf("%d threads in the outer parallel region\n", nthreads);
 
    #pragma omp parallel
-    {
-      int nthreads_inner = omp_get_num_threads();
+    {// Better to have sort of copies of shared variables that is continuosly accessed 
+    // in the nested threads
+      int nthreads_inner = omp_get_num_threads(); 
       #pragma omp single
       printf("\t%d threads in the inner parallel region\n", nthreads_inner);
     }
