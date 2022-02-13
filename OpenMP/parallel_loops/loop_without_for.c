@@ -62,7 +62,7 @@ int main( int argc, char **argv )
     int chunk    = N / nthreads;
     int mod      = N % nthreads;
     int my_first = chunk*me + ((me < mod)?me:mod);
-    int my_chunk = chunk + (mod > 0)*(me < mod);
+    int my_chunk = chunk + (mod > 0)*(me < mod); // if all true (mod > 0)*(me < mod)=1 !
 
    #pragma omp single
     printf("nthreads: %d, N: %d --- chunk is %d, reminder is %d\n", nthreads, N, chunk, mod);
