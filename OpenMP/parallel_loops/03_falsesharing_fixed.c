@@ -100,7 +100,7 @@ int main( int argc, char **argv )
   for ( int ii = 0; ii < N; ii++ )
     array[ii] = (double)ii;
 
-
+//Cache is long 8 doubles, so the entrire line reflushed won't affect the different mem updates
   double S[nthreads][8];                                    // this will store the summation's chunks
   
   double tstart  = CPU_TIME_W;  

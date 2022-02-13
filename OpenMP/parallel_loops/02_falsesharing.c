@@ -42,6 +42,14 @@
 
 #define N_default 100
 
+// Keeping track of the execution time, one can understand weather some asymmetric distribution in time happens among threads
+
+// All marcos are using same function clock_gettime but with different type of time:
+/*
+1) CLOCK_REALTIME: wallclock time (real time)
+2) CLOCK_THREAD_CPUTIME_ID: cpu time given to the thread (cpu time, not real)
+3) CLOCK_PROCESS_CPUTIME_ID: cpu time given to the process (cpu time, not real)
+*/
 #define CPU_TIME_W (clock_gettime( CLOCK_REALTIME, &ts ), (double)ts.tv_sec +	\
 		    (double)ts.tv_nsec * 1e-9)
 

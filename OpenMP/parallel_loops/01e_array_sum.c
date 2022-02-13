@@ -83,14 +83,16 @@ int main( int argc, char **argv )
   printf("omp summation with %d threads\n", nthreads );
 
   // allocate memory: MALLOC -> false sharing (cache contention, not cache miss!)
-  // Touching of memory: memory is requested but not allocated 
+  // Touching of memory: memory is requested but not allocated with malloc!
+  // calloc: contiguos allocation and touching memory initializing to 0
+  // Here you are requiring the memory but the mapping on physical banks happen later: when you touch them!
   if ( (array = (double*)malloc( N* sizeof(double) )) == NULL )
     {
       printf("I'm sorry, there is not enough memory to host %llu bytes\n",
 	     N * sizeof(double) );
       return 1;
     }
-  // initialize the array
+  // initialize the array in parallel: here you touch the memory: each threads links its mem banks (the same that will be used later)
   #pragma omp parallel for
   for ( int ii = 0; ii < N; ii++ )
     array[ii] = (double)ii;
