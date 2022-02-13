@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#include <omp.h>
+//#include <omp.h>
 #include <time.h>
+#include "/usr/local/Cellar/libomp/13.0.0/include/omp.h"
+//To compile use clang -Xpreprocessor -fopenmp -lomp -o pi_openmp.fix pi_openmp.fix.c
 
 #define DEFAULT 1000000
 #define SEED    918273
