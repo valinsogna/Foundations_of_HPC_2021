@@ -39,7 +39,7 @@ int main ( int argc, char **argv)
     //man srand48
     //drand48 it's thread safe, but it's multi-thread unsafe  in sense that it's race!!!!!!NOT a parallel random generator
 	  //These functions have an internal status (a value of the entropy) and in parallel each thread should have a unique status specifically!
-    x = drand48(); //Internal status of entropy miust differ among threads: use erand48, not drand48!
+    x = drand48(); //Internal status of entropy must differ among threads: use erand48, not drand48!
 	  y = drand48();
 	  M += ((x*x + y*y) < 1.0);
 	}

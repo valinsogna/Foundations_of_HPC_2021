@@ -26,9 +26,9 @@ int main(int argc,char* argv[])
  #pragma omp parallel
   {
     int myid = omp_get_thread_num();
-    int unsigned short myseeds[3] = {SEED+(myid),SEED+(myid*3+1), SEED+(myid*4+2)};
+    int unsigned short myseeds[3] = {SEED+(myid),SEED+(myid*3+1), SEED+(myid*4+2)}; //status is stored in 3 int!
     
-    seed48( myseeds );
+    seed48( myseeds ); //new seed generator
     
    #pragma omp for reduction(+:M)
     for( long long unsigned int i = 0; i < N; i++)
