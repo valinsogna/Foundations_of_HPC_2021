@@ -208,7 +208,7 @@ int main( int argc, char **argv )
 	int last  = chunk;
         #if defined (MIMIC_SLOWER_INITIALIZATION)
 	struct timespec nanot = {0, 200*uSEC};
-	nanosleep( &nanot, NULL );
+	nanosleep( &nanot, NULL ); // TO MIMIC the fact that data are arrivign irregularly
         #endif
         #if defined(DEBUG)
 	struct timespec myts;
