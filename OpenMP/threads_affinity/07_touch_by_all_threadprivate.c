@@ -124,7 +124,7 @@ int main( int argc, char **argv )
     PRINTF("thread %d: first i is %d\n", me, first_iteration);
     
     mywork = N/nthreads + 1;
-    if ( (array = (double*)calloc( mywork, sizeof(double) )) == NULL )
+    if ( (array = (double*)calloc( mywork, sizeof(double) )) == NULL ) //separated pointer for each chuck of array (no malloc unique ptr)
       {
 	printf("I'm sorry, on thread %d there is not"
 	       "enough memory to host %llu bytes\n",
