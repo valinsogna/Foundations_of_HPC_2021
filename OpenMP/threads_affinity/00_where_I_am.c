@@ -40,8 +40,9 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <sched.h>
-#include <omp.h>
-
+//#include <omp.h>
+//compile: clang -Xpreprocessor -fopenmp -lomp
+#include "/usr/local/Cellar/libomp/13.0.0/include/omp.h"
 
 #define N_default 1000
 
