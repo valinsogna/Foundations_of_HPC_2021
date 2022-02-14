@@ -144,7 +144,8 @@ int main( int argc, char **argv )
   
   // we impose a spread policy on the outer level
   //
-#pragma omp parallel proc_bind(spread) shared(result) firstprivate(N)
+#pragma omp parallel proc_bind(spread) shared(result) firstprivate(N) 
+// firstprivate(N) to reduce data contantion, since it is constantly checked at the end of the for loop
   {
 
     // inside each section then, we spawn a new region
