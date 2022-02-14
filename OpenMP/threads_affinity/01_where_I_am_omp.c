@@ -85,17 +85,20 @@ int main( int argc, char **argv )
 
     
     // get how many places are available in the place list
-    int nplaces = omp_get_num_places();    
+    int nplaces = omp_get_num_places();    //e.x. in a system with 4 socket of 12 core each with SMT one, 
+                                           // if the place are the threads then there are 96 places available,
+                                           // if the place are sockets then there are 4 nplaces
 
     // get on what "place" this thread is running on
-    int place   = omp_get_place_num();
+    int place   = omp_get_place_num(); //e.x. if it's running on socket 1, it returns 1
     
-    // get the number of procs available at this place
-    int nprocs  = omp_get_place_num_procs(place);
+    // get the number of procs available at this place (hwthreads)
+    int nprocs  = omp_get_place_num_procs(place); // e.x. if it's running on socket 1, then there are 24 places availble
     
     int proc_ids[nprocs];
-    omp_get_place_proc_ids( place, proc_ids );
-    
+    omp_get_place_proc_ids( place, proc_ids );//returns the numerical identifiers of the processors available to the execution environment in the specified place
+    //it initialize the vector proc_ids!
+
     // get how many places are available in the place list partition
     int npplaces = omp_get_partition_num_places();
 
