@@ -90,7 +90,7 @@ typedef struct
   uint  *children;       // This points to the begin
 			 // of the children list
   double result;         // holds the result of computation
-} node_t;
+} node_t; // name of the new type
 
 
 typedef struct
